@@ -1,0 +1,38 @@
+# Kingpin Solana Trading Bot
+# Render.com Deployment Configuration
+
+services:
+  - type: web
+    name: moldukbot-trader
+    runtime: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: SOLANA_RPC_URL
+        value: https://api.mainnet-beta.solana.com
+      - key: JUPITER_API
+        value: https://quote-api.jup.ag/v6
+      - key: WALLET_ADDRESS
+        value: 3s4DjczzFbGwmD9UaLf4xKSCiFBk97noLdNcbUSxs5Uq
+      - key: WALLET_PRIVATE_KEY
+        sync: false  # Set via Render Dashboard
+      - key: QWEN_API_KEY
+        sync: false  # Set via Render Dashboard
+      - key: QWEN_API_URL
+        value: https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation
+      - key: QWEN_MODEL
+        value: qwen3.5-122b-a10b
+      - key: MODE
+        value: LIVE
+      - key: MIN_TRADE_SIZE
+        value: 0.01
+      - key: MAX_POSITION_PCT
+        value: 8
+      - key: FEE_PERCENT
+        value: 1.0
+    healthCheckPath: /health
+    autoDeploy: true
