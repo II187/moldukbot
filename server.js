@@ -454,6 +454,36 @@ app.get('/health', (req, res) => {
   res.json({ status: 'ok', timestamp: Date.now() });
 });
 
+// Serve dashboard at root
+app.get('/', (req, res) => {
+  res.send(`
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>MoldukBot Dashboard</title>
+        <meta http-equiv="refresh" content="0;url=https://moldukbot.onrender.com/api/status">
+        <style>
+            body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background: #0a0a0f; color: #fff; }
+            h1 { color: #00ff88; }
+            a { color: #00d2ff; text-decoration: none; }
+            .links { margin-top: 30px; }
+            .link-box { display: inline-block; margin: 10px; padding: 15px 30px; background: #1a1a2e; border: 1px solid #00d2ff; border-radius: 10px; }
+        </style>
+    </head>
+    <body>
+        <h1>ðŸŽ¯ MoldukBot Server</h1>
+        <p>Status: <span style="color: #00ff88;">ONLINE</span></p>
+        <div class="links">
+            <div class="link-box"><a href="/api/status">ðŸ“Š API Status</a></div>
+            <div class="link-box"><a href="/api/qwen/status">ðŸ§  Qwen AI</a></div>
+            <div class="link-box"><a href="/health">âœ… Health Check</a></div>
+        </div>
+        <p style="margin-top: 30px; color: #888;">Use the local moldukbot.html for full dashboard</p>
+    </body>
+    </html>
+  `);
+});
+
 app.get('/api/status', (req, res) => {
   res.json(state);
 });
